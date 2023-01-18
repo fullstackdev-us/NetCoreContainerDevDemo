@@ -15,6 +15,13 @@
 This is likely due to your network settings. If your machine uses man-in-the-middle software with a self-signed certificate (most corporations do), 
 you will need to include a bundle certificate: .devcontainer/bundle_cert.pem 
 
+Then the following lines in Dockerfile:
+
+```
+COPY ./bundle_cert.pem /usr/local/share/ca-certificates/bundle_cert.crt
+RUN update-ca-certificates
+```
+
 ### Git is complaining about 'unsafe' repositories
 
 This is the same problem with self signed certificates. See the `#Extensions were not automatically installed` section above
