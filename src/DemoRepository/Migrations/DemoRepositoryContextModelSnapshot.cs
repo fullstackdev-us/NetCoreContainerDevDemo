@@ -35,7 +35,7 @@ namespace DemoRepository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("City");
                 });
 
             modelBuilder.Entity("DemoRepository.Models.Forecast", b =>
@@ -46,12 +46,33 @@ namespace DemoRepository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TemperatureF")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Forecasts");
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Forecast");
+                });
+
+            modelBuilder.Entity("DemoRepository.Models.Forecast", b =>
+                {
+                    b.HasOne("DemoRepository.Models.City", "City")
+                        .WithMany("Forecasts")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("DemoRepository.Models.City", b =>
+                {
+                    b.Navigation("Forecasts");
                 });
 #pragma warning restore 612, 618
         }

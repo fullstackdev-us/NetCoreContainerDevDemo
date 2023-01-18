@@ -10,6 +10,10 @@ public class DemoRepositoryContext : DbContext
   {
   }
 
-  public DbSet<City> Cities { get; set; }
-  public DbSet<Forecast> Forecasts { get; set; }
+  protected override void OnModelCreating(ModelBuilder modelBuilder) {
+    modelBuilder.ApplyConfigurationsFromAssembly(typeof(DemoRepositoryContext).Assembly);
+  }
+
+  public DbSet<City> City { get; set; }
+  public DbSet<Forecast> Forecast { get; set; }
 }
