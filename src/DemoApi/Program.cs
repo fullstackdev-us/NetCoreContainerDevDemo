@@ -10,8 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var assemblyName = typeof(DemoRepositoryContext).Assembly.GetName().Name;
 builder.Services.AddDbContext<DemoRepositoryContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),x => 
+        x.MigrationsAssembly(assemblyName)
+    );
 });
 
 var app = builder.Build();
