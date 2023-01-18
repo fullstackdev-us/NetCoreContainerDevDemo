@@ -9,8 +9,10 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-dotnettools.csharp"
-      ]
+		"ms-dotnettools.csharp",
+		"ms-mssql.mssql",
+		"ms-azuretools.vscode-docker"
+	]
     }
   },
   "containerEnv": { 
