@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DemoRepository\DemoRepository.csproj" />
+    <ProjectReference Include="..\demoservices\DemoServices.csproj" />
   </ItemGroup>
 
 </Project>
