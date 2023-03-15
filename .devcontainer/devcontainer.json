@@ -4,15 +4,17 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "forwardPorts": [
     3000,
-    1433
+    1433,
+    15672
   ],
   "customizations": {
     "vscode": {
       "extensions": [
-		"ms-dotnettools.csharp",
-		"ms-mssql.mssql",
-		"ms-azuretools.vscode-docker"
-	]
+        "ms-dotnettools.csharp",
+        "ms-mssql.mssql",
+        "ms-azuretools.vscode-docker",
+        "kreativ-software.csharpextensions"
+      ]
     }
   },
   "containerEnv": { 

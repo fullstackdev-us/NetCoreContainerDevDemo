@@ -1,4 +1,7 @@
+using DemoDomain.Interfaces;
 using DemoRepository;
+using DemoServices.DependencyInjection;
+using DemoServices.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +19,8 @@ builder.Services.AddDbContext<DemoRepositoryContext>(options => {
         x.MigrationsAssembly(assemblyName)
     );
 });
+
+builder.Services.AddServices(builder.Configuration);
 
 var app = builder.Build();
 

@@ -10,11 +10,34 @@ services:
     network_mode: service:db
     command: sleep infinity
 
+  # db:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - "1433:1433"
+  #   environment:
+  #     SA_PASSWORD: "superSecretPassword123!"
+  #     ACCEPT_EULA: "Y"
+
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/azure-sql-edge:latest
     restart: unless-stopped
     ports:
       - "1433:1433"
     environment:
       SA_PASSWORD: "superSecretPassword123!"
       ACCEPT_EULA: "Y"
+
+  storage:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+  
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
