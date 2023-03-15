@@ -27,9 +27,14 @@ namespace DemoApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddForecastPayload payload)
         {
-            await this.forecastService.AddForecast(payload.CityId, payload.TemperatureF);
+            var result = await this.forecastService.AddForecast(payload.CityId, payload.TemperatureF);
 
-            return Ok();
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List() {
+            return Ok(await this.forecastService.ListForecasts());
         }
     }
 }

@@ -1,6 +1,7 @@
 
 using DemoDomain.Interfaces;
 using DemoDomain.Messages;
+using DemoDomain.Responses;
 using DemoRepository;
 using DemoRepository.Models;
 using MassTransit;
@@ -25,7 +26,7 @@ namespace DemoServices.Services
         this.forecasts = context.Forecast;
     }
     
-    public async Task AddForecast(int cityId, int temperatureF)
+    public async Task<ForecastAddedResponse> AddForecast(int cityId, int temperatureF)
     {
         var city = cities.FirstOrDefault(c => c.Id == cityId);
 
@@ -45,6 +46,17 @@ namespace DemoServices.Services
             CityName = city.Name,
             TemperatureF = temperatureF
         });
+
+        return new ForecastAddedResponse {
+          Id = forecast.Id,
+          CityId = city.Id,
+          TemperatureF = forecast.TemperatureF
+        };
+    }
+
+    public async Task<object[]?> ListForecasts()
+    {
+      return forecasts.Select(f => new { id = f.Id, cityId = f.City.Id, temperatureF = f.TemperatureF }).ToList().ToArray();
     }
   }
 }

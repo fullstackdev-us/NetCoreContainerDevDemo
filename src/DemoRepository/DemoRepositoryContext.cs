@@ -11,16 +11,16 @@ public class DemoRepositoryContext : DbContext
   {
   }
 
-  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+  // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+  //       {
+  //           var configuration = new ConfigurationBuilder()
+  //               .SetBasePath(Directory.GetCurrentDirectory())
+  //               .AddJsonFile("appsettings.json")
+  //               .Build();
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            optionsBuilder.UseSqlServer(connectionString);
-        }
+  //           var connectionString = configuration.GetConnectionString("DefaultConnection");
+  //           optionsBuilder.UseSqlServer(connectionString);
+  //       }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
     modelBuilder.ApplyConfigurationsFromAssembly(typeof(DemoRepositoryContext).Assembly);

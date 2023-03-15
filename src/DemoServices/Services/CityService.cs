@@ -1,6 +1,7 @@
 
 using DemoDomain.Interfaces;
 using DemoDomain.Messages;
+using DemoDomain.Responses;
 using DemoRepository;
 using DemoRepository.Models;
 using MassTransit;
@@ -24,7 +25,7 @@ namespace DemoServices.Services
         this.cities = context.City;
     }
 
-    public async Task AddCity(string name)
+    public async Task<CityAddedResponse> AddCity(string name)
     {
       var city = new City() {
         Name = name
@@ -37,6 +38,16 @@ namespace DemoServices.Services
       await messageBus.Publish(new CityAdded() {
         City = name
       });
+
+      return new CityAddedResponse {
+        Id = city.Id,
+        Name = city.Name
+      };
+    }
+
+    public async Task<object[]?> ListCities()
+    {
+       return cities.ToList().ToArray();
     }
   }
 }

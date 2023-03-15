@@ -23,8 +23,13 @@ public class CityController : ControllerBase
   [HttpPost]
   public async Task<IActionResult> Post([FromBody] AddCityPayload payload)
   {
-    await this.cityService.AddCity(payload.Name);
+    var result = await this.cityService.AddCity(payload.Name);
 
-    return Ok();
+    return Ok(result);
+  }
+
+  [HttpGet]
+  public async Task<IActionResult> List() {
+    return Ok(await this.cityService.ListCities());
   }
 }
