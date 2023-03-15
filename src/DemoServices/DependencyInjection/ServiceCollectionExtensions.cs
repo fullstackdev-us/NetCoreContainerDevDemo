@@ -8,9 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DemoServices.DependencyInjection;
 
-public static class ServiceCollectionExtensions_MassTransit
+public static class ServiceCollectionExtensions
 {
-    public static void AddMessaging(this IServiceCollection services, IConfiguration config) {
+    public static void AddServices(this IServiceCollection services, IConfiguration config) {
         var rabbitMqConfig = new RabbitMqConfig();
         config.GetSection(RabbitMqConfig.SectionName).Bind(rabbitMqConfig);
 
@@ -30,6 +30,8 @@ public static class ServiceCollectionExtensions_MassTransit
                 });
             });
 
-            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IForecastService, ForecastService>();
+            
     }
 }

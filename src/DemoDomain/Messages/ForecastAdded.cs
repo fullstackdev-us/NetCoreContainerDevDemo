@@ -1,7 +1,10 @@
+using DemoDomain.Interfaces;
+
 namespace DemoDomain.Messages;
 
-public class ForecastAdded
+public class ForecastAdded : IMessage
 {
-  public string City { get; set; }
+  public string CityName { get; set; }
+  public int CityId { get; set; }
   public int TemperatureF { get; set; }
 }

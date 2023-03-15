@@ -1,8 +1,10 @@
 
 
+using DemoDomain.Interfaces;
+
 namespace DemoDomain.Messages;
 
-public class CityAdded
+public class CityAdded : IMessage
 {
   public string City { get; set; }
 }

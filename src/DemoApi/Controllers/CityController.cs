@@ -1,4 +1,5 @@
 using DemoDomain.Interfaces;
+using DemoDomain.Payloads;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoApi.Controllers;
@@ -8,21 +9,21 @@ namespace DemoApi.Controllers;
 public class CityController : ControllerBase
 {
   private readonly ILogger<CityController> logger;
-  private readonly IMessageService messageService;
+  private readonly ICityService cityService;
 
   public CityController(
           ILogger<CityController> logger,
-          IMessageService messageService
+          ICityService cityService
       )
   {
     this.logger = logger;
-    this.messageService = messageService;
+    this.cityService = cityService;
   }
 
   [HttpPost]
-  public IActionResult Post([FromBody] string message)
+  public async Task<IActionResult> Post([FromBody] AddCityPayload payload)
   {
-    messageService.SendMessage(message);
+    await this.cityService.AddCity(payload.Name);
 
     return Ok();
   }

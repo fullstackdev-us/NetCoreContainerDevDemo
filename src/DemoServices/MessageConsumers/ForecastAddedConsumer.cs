@@ -15,7 +15,7 @@ public class ForecastAddedConsumer : IConsumer<ForecastAdded>
 
   public Task Consume(ConsumeContext<ForecastAdded> context)
   {
-    logger.LogInformation($"Forecast Added: City: {context.Message.City} Temperature (F): {context.Message.TemperatureF}");
+    logger.LogInformation($"Forecast Added: City: {context.Message.CityName} Temperature (F): {context.Message.TemperatureF}");
 
     return Task.CompletedTask;
   }
